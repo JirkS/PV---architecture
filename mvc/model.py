@@ -1,11 +1,10 @@
 import os
 
 
-class TaskListModel():
-
-    def __init__(self,file_path,file_encoding):
+class TaskListModel:
+    def __init__(self, file_path, file_encoding):
         self.file_path = file_path
-        self.file_encoding =file_encoding
+        self.file_encoding = file_encoding
 
     def get_all(self):
         tasks = list()
@@ -33,3 +32,15 @@ class TaskListModel():
     def remove_all(self):
         if os.path.exists(self.file_path):
             os.remove(self.file_path)
+
+    def remove_first_task(self):
+        lines = []
+        if os.path.exists(self.file_path):
+            with open(self.file_path, "r", encoding=self.file_encoding) as f:
+                lines = f.readlines()
+
+        if os.path.exists(self.file_path):
+            with open(self.file_path, "w", encoding=self.file_encoding) as f:
+                for number, line in enumerate(lines):
+                    if number not in [0]:
+                        f.write(line)

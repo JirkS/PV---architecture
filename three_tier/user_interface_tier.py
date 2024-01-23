@@ -1,5 +1,3 @@
-
-
 class ConsoleUserInterface:
 
     def __init__(self,line_length):
@@ -13,7 +11,7 @@ class ConsoleUserInterface:
         self.print_line()
         print(message)
 
-    def print_task_list(self,task_list):
+    def print_task_list(self, task_list):
         self.print_line()
         print("Seznam úkolů:")
         i = 0
@@ -21,6 +19,13 @@ class ConsoleUserInterface:
             i += 1
             print("\t" + str(i) + ". " + task.strip())
         if (i == 0):
+            print("\t(žádné úkoly)")
+
+    def print_first_task(self, task):
+        self.print_line()
+        if len(task) != 0:
+            print("\t1. ukol: " + task)
+        else:
             print("\t(žádné úkoly)")
 
     def new_task_input(self):
@@ -38,6 +43,8 @@ class ConsoleUserInterface:
             ("Vypsat seznam", self.application.show_task_list),
             ("Přidat na seznam", self.application.add_task),
             ("Smazat celý seznam", self.application.remove_task_list),
+            ("Zobrazení pouze prvního úkolu", self.application.show_first_task),
+            ("Smazání pouze prvního úkolu", self.application.remove_first_task),
             ("Ukončit program", self.application.terminate),
         ]
 

@@ -1,4 +1,4 @@
-class ConsoleView():
+class ConsoleView:
 
     def __init__(self, line_length):
         self.line_length = line_length
@@ -14,7 +14,7 @@ class ConsoleView():
         self.show_new_task_input = False
         self.message = None
 
-    def print_line(self,symbol = "="):
+    def print_line(self, symbol="="):
         print(symbol * self.line_length)
 
     def print_message(self):
@@ -28,7 +28,7 @@ class ConsoleView():
         for task in self.model.get_all():
             i += 1
             print("\t" + str(i) + ". " + task.strip())
-        if (i == 0):
+        if i == 0:
             print("\t(žádné úkoly)")
 
     def print_first_task(self):
@@ -42,9 +42,9 @@ class ConsoleView():
     def new_task_input(self):
         self.print_line()
         new_task = None
-        while (new_task == None):
+        while new_task is None:
             new_task = input("Zadejte nový úkol: ").strip()
-            if (len(new_task) < 1):
+            if len(new_task) < 1:
                 print("Neplatné zadání musíte zadat nějaký text")
                 new_task = None
         action = self.controller.add_new_task
@@ -68,30 +68,30 @@ class ConsoleView():
             print("\t" + str(num) + ". " + label)
 
         choosen_num = None
-        while (choosen_num == None):
+        while choosen_num is None:
             choosen_num = input("Zadejte číslo příkazu (1-"+str(len(actions))+"): ").strip()
             try:
                 choosen_num = int(choosen_num)
-                if (not 0 < choosen_num <= len(actions)):
+                if not 0 < choosen_num <= len(actions):
                     raise Exception()
-            except:
+            except Exception as e:
                 print("Neplatné zadání musíte zadat číslo mezi 1 až "+str(len(actions)))
                 choosen_num = None
         action = actions[choosen_num-1][1]
         action()
 
     def update(self):
-        if (self.show_message == True):
+        if self.show_message is True:
             self.print_message()
 
-        if (self.show_task_list == True):
+        if self.show_task_list is True:
             self.print_task_list()
 
-        if self.show_first_task == True:
+        if self.show_first_task is True:
             self.print_first_task()
 
-        if (self.show_new_task_input == True):
+        if self.show_new_task_input is True:
             self.new_task_input()
 
-        if(self.show_menu_input == True):
+        if self.show_menu_input is True:
             self.menu_input()

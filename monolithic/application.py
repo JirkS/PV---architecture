@@ -22,21 +22,21 @@ class Application():
         ]
 
         self._is_running = True
-        while (self._is_running):
+        while self._is_running:
             print("=" * self.line_length)
             print("Vyberte příkaz:")
             for label, command_num in commands:
                 print("\t" + str(command_num) + ". " + label)
 
             command_num = None
-            while (command_num == None):
-                command_num = input("Zadejte číslo příkazu (1-"+ str(len(commands)) +"): ").strip()
+            while command_num is None:
+                command_num = input("Zadejte číslo příkazu (1-"+ str(len(commands)) + "): ").strip()
                 try:
                     command_num = int(command_num)
-                    if (not 0 < command_num <= len(commands)):
+                    if not 0 < command_num <= len(commands):
                         raise Exception()
                 except:
-                    print("Neplatné zadání musíte zadat číslo mezi 1 až "+ str(len(commands)))
+                    print("Neplatné zadání musíte zadat číslo mezi 1 až " + str(len(commands)))
                     command_num = None
 
             if command_num == 5 or command_num == 3:
@@ -59,7 +59,7 @@ class Application():
                 if os.path.exists(self.file_path):
                     with open(self.file_path, "r", encoding=self.file_encoding) as f:
                         for task in f.readlines():
-                            i += 1;
+                            i += 1
                             print("\t" + str(i) + ". " + task.strip())
                 if i == 0:
                     print("\t(žádné úkoly)")
